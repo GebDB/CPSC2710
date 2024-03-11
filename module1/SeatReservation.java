@@ -10,10 +10,15 @@ public class SeatReservation {
     public String getFlightDesignator() {
         return flightDesignator;
     }
-    public void setFlightDesignator(String flightDesignator) {
-        if (flightDesignator == null)
-          throw new IllegalArgumentException("flight designator cannot be null");
-        this.flightDesignator = flightDesignator;
+    public void setFlightDesignator(String fd) {
+
+            if (flightDesignator == null)
+                throw new IllegalArgumentException("flight designator cannot be null");
+            this.flightDesignator = flightDesignator;
+
+            if (this.flightDesignator.length() < 4 || this.flightDesignator.length() > 6) {
+                throw new IllegalArgumentException("Character length is not in the bounds of 3 < x < 7");
+            }
     }
     public java.time.LocalDate getFlightDate() {
         return flightDate;
