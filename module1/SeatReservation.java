@@ -10,15 +10,16 @@ public class SeatReservation {
     public String getFlightDesignator() {
         return flightDesignator;
     }
-    public void setFlightDesignator(String fd) {
+    public void setFlightDesignator(String flightDesignator) {
 
-            if (flightDesignator == null)
-                throw new IllegalArgumentException("flight designator cannot be null");
-            this.flightDesignator = flightDesignator;
+        if (flightDesignator == null) {
+            throw new IllegalArgumentException("flight designator cannot be null");
+        }
+        this.flightDesignator = flightDesignator;
 
-            if (this.flightDesignator.length() < 4 || this.flightDesignator.length() > 6) {
-                throw new IllegalArgumentException("Character length is not in the bounds of 3 < x < 7");
-            }
+        if (this.flightDesignator.length() < 4 || this.flightDesignator.length() > 6) {
+            throw new IllegalArgumentException("Character length is not in the bounds of 3 < x < 7");
+        }
     }
     public java.time.LocalDate getFlightDate() {
         return flightDate;
@@ -49,8 +50,12 @@ public class SeatReservation {
             result = result + flightDesignator;
         }
 
-        String ld = flightDate.toString();
+        String ld ="null";
+        if (flightDate != null) {
+            ld = flightDate.toString();
+        }
         result = result + ",flightDate=" + ld + ",firstName=";
+
         if (firstName == null) {
             String fn = "null";
             result = result + fn;
@@ -67,7 +72,7 @@ public class SeatReservation {
         else {
             result = result + lastName;
         }
-        result = result + "}.";
+        result = result + "}";
 
         return result;
     }
