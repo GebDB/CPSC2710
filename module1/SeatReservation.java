@@ -11,6 +11,10 @@ public class SeatReservation {
         return flightDesignator;
     }
     public void setFlightDesignator(String fd) {
+
+        if (fd.length() < 4 || fd.length() > 6) {
+            throw new IllegalArgumentException("Character length is not in the bounds of 3 < x < 7");
+        }
         flightDesignator = fd;
     }
     public java.time.LocalDate getFlightDate() {
