@@ -1,4 +1,4 @@
-package module2.src.main.java.edu.au.cpsc.module2;
+package edu.au.cpsc.module2;
 import java.time.LocalDate;
 
 public class SeatReservation {
