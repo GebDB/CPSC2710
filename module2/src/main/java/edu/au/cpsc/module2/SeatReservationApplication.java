@@ -12,13 +12,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import static javafx.geometry.Pos.TOP_RIGHT;
 
 public class SeatReservationApplication extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
-        SeatReservation seatres = new SeatReservation();
+        SeatReservation seatReservation = new SeatReservation();
+        seatReservationSetup(seatReservation);
 
         //BorderPane
         BorderPane borderPane = new BorderPane();
@@ -26,12 +29,27 @@ public class SeatReservationApplication extends Application {
 
         //Center GridPane
         GridPane center = new GridPane();
-        setFlyingWithInfantUI(center);
-        setFlightDesignatorUI(center);
-        setFirstNameUI(center);
-        setLastNameUI(center);
-        setFlightDateUI(center);
-        setNumberOfPassengersUI(center);
+        //Center labels
+        Label flightDesignatorLabel = new Label("Flight designator:");
+        Label flightDateLabel = new Label("Flight date:");
+        Label firstNameLabel = new Label("First name:");
+        Label lastNameLabel = new Label("Last name:");
+        Label numberOfBagsLabel = new Label("Bags:");
+        Label flyingWithBabyLabel = new Label("Flying with baby?");
+        Label passengerTotalLabel = new Label("Number of passengers:");
+        //Center inputs
+        TextField passengerTotalInput = new TextField("1");
+        passengerTotalInput.setEditable(false);
+        TextField firstNameInput = new TextField();
+        TextField lastNameInput = new TextField();
+        TextField flightDesignatorInput = new TextField();
+        TextField numberOfBagsInput = new TextField();
+        DatePicker flightDatePicker = new DatePicker();
+        CheckBox flyingWithBabyInput = new CheckBox();
+        //Add UI
+        addCenterGridPaneUI(center, passengerTotalLabel, passengerTotalInput, flightDateLabel, flightDatePicker,
+                lastNameLabel, lastNameInput, firstNameLabel, firstNameInput, flightDesignatorLabel,
+                flightDesignatorInput, flyingWithBabyLabel, flyingWithBabyInput, numberOfBagsLabel, numberOfBagsInput);
 
         //Bottom HBox
         HBox bottom = new HBox();
@@ -46,51 +64,57 @@ public class SeatReservationApplication extends Application {
 
         stage.setTitle("Seat Reservation Editor");
         stage.setScene(scene);
+        updateUI(firstNameInput, seatReservation, lastNameInput, flightDatePicker, flightDesignatorInput,
+                flyingWithBabyInput, numberOfBagsInput);
         stage.show();
+
     }
 
-    private static void setNumberOfPassengersUI(GridPane center) {
-        Label passengerTotalLabel = new Label("Number of Passengers:");
-        TextField passengerTotalInput = new TextField("1");
-        passengerTotalInput.setEditable(false);
-        center.add(passengerTotalLabel, 0, 5);
-        center.add(passengerTotalInput, 1, 5);
+    private static void updateUI(TextField firstNameInput, SeatReservation seatReservation, TextField lastNameInput,
+                                 DatePicker flightDatePicker, TextField flightDesignatorInput, CheckBox flyingWithBabyInput,
+                                 TextField numberOfBagsInput) {
+        firstNameInput.setText(seatReservation.getFirstName());
+        lastNameInput.setText(seatReservation.getLastName());
+        flightDatePicker.setValue(seatReservation.getFlightDate());
+        flightDesignatorInput.setText(seatReservation.getFlightDesignator());
+        numberOfBagsInput.setText("" + seatReservation.getNumberOfBags());
+        flyingWithBabyInput.setSelected(seatReservation.isFlyingWithInfant());
     }
 
-    private static void setFlightDateUI(GridPane center) {
-        Label flightDateLabel = new Label("Flight Date:");
-        DatePicker flightDatePicker = new DatePicker();
-        center.add(flightDateLabel, 0, 4);
-        center.add(flightDatePicker, 1, 4);
-    }
-
-    private static void setLastNameUI(GridPane center) {
-        Label lastNameLabel = new Label("Last Name:");
-        TextField lastNameInput = new TextField("Doe");
-        center.add(lastNameLabel, 0, 3);
-        center.add(lastNameInput, 1, 3);
-    }
-
-    private static void setFirstNameUI(GridPane center) {
-        Label firstNameLabel = new Label("First Name:");
-        TextField firstNameInput = new TextField("John");
+    private static void addCenterGridPaneUI(GridPane center, Label passengerTotalLabel, TextField passengerTotalInput,
+                                            Label flightDateLabel, DatePicker flightDatePicker, Label lastNameLabel,
+                                            TextField lastNameInput, Label firstNameLabel, TextField firstNameInput,
+                                            Label flightDesignatorLabel, TextField flightDesignatorInput,
+                                            Label flyingWithBabyLabel, CheckBox flyingWithBabyInput, Label numberOfBagsLabel,
+                                            TextField numberOfBagsInput ) {
+        center.add(flightDesignatorLabel, 0, 0);
+        center.add(flightDesignatorInput, 1, 0);
+        center.add(flightDateLabel, 0, 1);
+        center.add(flightDatePicker, 1, 1);
         center.add(firstNameLabel, 0, 2);
         center.add(firstNameInput, 1, 2);
+        center.add(lastNameLabel, 0, 3);
+        center.add(lastNameInput, 1, 3);
+        center.add(numberOfBagsLabel, 0, 4);
+        center.add(numberOfBagsInput, 1, 4);
+        center.add(flyingWithBabyLabel, 0, 5);
+        center.add(flyingWithBabyInput, 1, 5);
+        center.add(passengerTotalLabel, 0, 6);
+        center.add(passengerTotalInput, 1, 6);
     }
 
-    private static void setFlightDesignatorUI(GridPane center) {
-        Label flightDesignatorLabel = new Label("Flight Designator:");
-        TextField flightDesignatorInput = new TextField("xxxxx");
-        center.add(flightDesignatorLabel, 0, 1);
-        center.add(flightDesignatorInput, 1, 1);
+    private static void seatReservationSetup(SeatReservation seatReservation) {
+        seatReservation.setFirstName("John");
+        seatReservation.setLastName("Doe");
+        seatReservation.setFlightDate(LocalDate.now());
+        seatReservation.setFlightDesignator("TG23");
+        seatReservation.makeFlyingWithInfant();
+        seatReservation.setNumberOfBags(2);
     }
 
-    private static void setFlyingWithInfantUI(GridPane center) {
-        Label flyingWithBabyLabel = new Label("Flying with baby:");
-        CheckBox flyingWithBabyInput = new CheckBox();
-        center.add(flyingWithBabyLabel, 0, 0);
-        center.add(flyingWithBabyInput, 1, 0);
-    }
+
+
+
 
     public static void main(String[] args) {
         launch();
