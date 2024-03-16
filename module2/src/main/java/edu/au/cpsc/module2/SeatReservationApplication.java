@@ -1,10 +1,15 @@
 package edu.au.cpsc.module2;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -40,6 +45,7 @@ public class SeatReservationApplication extends Application {
         //Center inputs
         TextField passengerTotalInput = new TextField("1");
         passengerTotalInput.setEditable(false);
+
         TextField firstNameInput = new TextField();
         TextField lastNameInput = new TextField();
         TextField flightDesignatorInput = new TextField();
@@ -65,20 +71,36 @@ public class SeatReservationApplication extends Application {
         stage.setTitle("Seat Reservation Editor");
         stage.setScene(scene);
         updateUI(firstNameInput, seatReservation, lastNameInput, flightDatePicker, flightDesignatorInput,
-                flyingWithBabyInput, numberOfBagsInput);
+                flyingWithBabyInput, numberOfBagsInput, passengerTotalInput);
+
+
         stage.show();
 
     }
 
     private static void updateUI(TextField firstNameInput, SeatReservation seatReservation, TextField lastNameInput,
                                  DatePicker flightDatePicker, TextField flightDesignatorInput, CheckBox flyingWithBabyInput,
-                                 TextField numberOfBagsInput) {
+                                 TextField numberOfBagsInput, TextField passengerTotalInput) {
         firstNameInput.setText(seatReservation.getFirstName());
         lastNameInput.setText(seatReservation.getLastName());
         flightDatePicker.setValue(seatReservation.getFlightDate());
         flightDesignatorInput.setText(seatReservation.getFlightDesignator());
         numberOfBagsInput.setText("" + seatReservation.getNumberOfBags());
         flyingWithBabyInput.setSelected(seatReservation.isFlyingWithInfant());
+        flyingWithBabyInput.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                if (!seatReservation.isFlyingWithInfant()) {
+                    passengerTotalInput.setText("2");
+                    seatReservation.makeFlyingWithInfant();
+                }
+                else {
+                    passengerTotalInput.setText("1");
+                    seatReservation.makeNotFlyingWithInfant();
+                }
+            }
+        });
     }
 
     private static void addCenterGridPaneUI(GridPane center, Label passengerTotalLabel, TextField passengerTotalInput,
@@ -108,7 +130,7 @@ public class SeatReservationApplication extends Application {
         seatReservation.setLastName("Doe");
         seatReservation.setFlightDate(LocalDate.now());
         seatReservation.setFlightDesignator("TG23");
-        seatReservation.makeFlyingWithInfant();
+        seatReservation.makeNotFlyingWithInfant();
         seatReservation.setNumberOfBags(2);
     }
 
