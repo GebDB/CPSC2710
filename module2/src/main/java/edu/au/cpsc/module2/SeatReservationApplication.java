@@ -1,32 +1,22 @@
 package edu.au.cpsc.module2;
-
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
-import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.time.LocalDate;
-
-import static javafx.geometry.Pos.TOP_RIGHT;
 
 public class SeatReservationApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
         SeatReservation seatReservation = new SeatReservation();
-        seatReservationSetup(seatReservation);
 
         //BorderPane
         BorderPane borderPane = new BorderPane();
@@ -72,43 +62,96 @@ public class SeatReservationApplication extends Application {
         stage.setScene(scene);
         updateUI(firstNameInput, seatReservation, lastNameInput, flightDatePicker, flightDesignatorInput,
                 flyingWithBabyInput, numberOfBagsInput, passengerTotalInput);
-
-
+        cancelInput(button1);
+        saveInput(button2, firstNameInput, seatReservation, lastNameInput, flightDatePicker, flightDesignatorInput,
+                flyingWithBabyInput, numberOfBagsInput);
         stage.show();
 
     }
 
+    // Updates the UI based on the data from the seatReservation class.
     private static void updateUI(TextField firstNameInput, SeatReservation seatReservation, TextField lastNameInput,
                                  DatePicker flightDatePicker, TextField flightDesignatorInput, CheckBox flyingWithBabyInput,
                                  TextField numberOfBagsInput, TextField passengerTotalInput) {
+
         firstNameInput.setText(seatReservation.getFirstName());
         lastNameInput.setText(seatReservation.getLastName());
         flightDatePicker.setValue(seatReservation.getFlightDate());
         flightDesignatorInput.setText(seatReservation.getFlightDesignator());
         numberOfBagsInput.setText("" + seatReservation.getNumberOfBags());
         flyingWithBabyInput.setSelected(seatReservation.isFlyingWithInfant());
-        flyingWithBabyInput.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+        flyingWithBabyInput.addEventHandler(ActionEvent.ACTION, event -> {
 
-                if (!seatReservation.isFlyingWithInfant()) {
-                    passengerTotalInput.setText("2");
-                    seatReservation.makeFlyingWithInfant();
-                }
-                else {
-                    passengerTotalInput.setText("1");
-                    seatReservation.makeNotFlyingWithInfant();
-                }
+            if (!seatReservation.isFlyingWithInfant()) {
+                passengerTotalInput.setText("2");
+                seatReservation.makeFlyingWithInfant();
+            }
+            else {
+                passengerTotalInput.setText("1");
+                seatReservation.makeNotFlyingWithInfant();
             }
         });
     }
 
+    // Closes the application based on an event and prints a message to console.
+    public static void cancelInput(Button button1) {
+        button1.addEventHandler(ActionEvent.ACTION, event -> {
+           System.out.println("Cancel clicked");
+           Platform.exit();
+        });
+    }
+
+    /* Sets the SeatReservation class variables to the user-inputs provided.
+     * Closes the program if no exceptions are caught.
+     */
+    public static void saveInput(Button button2, TextField firstNameInput, SeatReservation seatReservation, TextField lastNameInput,
+                                 DatePicker flightDatePicker, TextField flightDesignatorInput, CheckBox flyingWithBabyInput,
+                                 TextField numberOfBagsInput) {
+        button2.addEventHandler(ActionEvent.ACTION, event -> {
+            seatReservation.setFirstName(firstNameInput.getText());
+            seatReservation.setLastName(lastNameInput.getText());
+            seatReservation.setFlightDate(flightDatePicker.getValue());
+
+            try {
+                seatReservation.setFlightDesignator(flightDesignatorInput.getText());
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println("Flight designator code must be between 3 and 7 characters.");
+                return;
+            }
+            catch (NullPointerException e) {
+                System.out.println("Flight designator cannot be null/empty.");
+                return;
+            }
+
+            if (flyingWithBabyInput.isSelected()) {
+                seatReservation.makeFlyingWithInfant();
+            }
+            else {
+                seatReservation.makeNotFlyingWithInfant();
+            }
+
+            try {
+                seatReservation.setNumberOfBags(Integer.parseInt(numberOfBagsInput.getText()));
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Enter a integer number for the number of bags in number form (e.g. \"2\").");
+                return;
+            }
+            System.out.println(seatReservation.toString());
+            Platform.exit();
+        });
+    }
+    // Adds all center UI to the grid panel.
     private static void addCenterGridPaneUI(GridPane center, Label passengerTotalLabel, TextField passengerTotalInput,
                                             Label flightDateLabel, DatePicker flightDatePicker, Label lastNameLabel,
                                             TextField lastNameInput, Label firstNameLabel, TextField firstNameInput,
                                             Label flightDesignatorLabel, TextField flightDesignatorInput,
                                             Label flyingWithBabyLabel, CheckBox flyingWithBabyInput, Label numberOfBagsLabel,
                                             TextField numberOfBagsInput ) {
+        center.setPadding(new Insets(5.0));
+        center.setVgap(5.0);
+        center.setHgap(5.0);
         center.add(flightDesignatorLabel, 0, 0);
         center.add(flightDesignatorInput, 1, 0);
         center.add(flightDateLabel, 0, 1);
@@ -124,19 +167,6 @@ public class SeatReservationApplication extends Application {
         center.add(passengerTotalLabel, 0, 6);
         center.add(passengerTotalInput, 1, 6);
     }
-
-    private static void seatReservationSetup(SeatReservation seatReservation) {
-        seatReservation.setFirstName("John");
-        seatReservation.setLastName("Doe");
-        seatReservation.setFlightDate(LocalDate.now());
-        seatReservation.setFlightDesignator("TG23");
-        seatReservation.makeNotFlyingWithInfant();
-        seatReservation.setNumberOfBags(2);
-    }
-
-
-
-
 
     public static void main(String[] args) {
         launch();
