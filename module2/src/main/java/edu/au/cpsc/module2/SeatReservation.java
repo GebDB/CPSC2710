@@ -6,6 +6,8 @@ public class SeatReservation {
     private LocalDate flightDate;
     private String firstName;
     private String lastName;
+    private int numberOfBags;
+    private boolean flyingWithInfant;
 
     public String getFlightDesignator() {
         return flightDesignator;
@@ -39,16 +41,20 @@ public class SeatReservation {
     public void setLastName(String ln) {
         lastName = ln;
     }
+    public int getNumberOfBags() { return numberOfBags; }
+    public void setNumberOfBags(int bagsIn) { numberOfBags = bagsIn; }
+    public boolean isFlyingWithInfant() { return flyingWithInfant; };
+    public void makeFlyingWithInfant() { flyingWithInfant = true; }
+    public void makeNotFlyingWithInfant() { flyingWithInfant = false; }
+
     public String toString() {
         String result = "SeatReservation{flightDesignator=";
+        String fd = "null";
+        if (flightDesignator != null) {
+            fd = flightDesignator;
+        }
+        result = result + fd;
 
-        if (flightDesignator == null) {
-            String fd = "null";
-            result = result + fd;
-        }
-        else {
-            result = result + flightDesignator;
-        }
 
         String ld ="null";
         if (flightDate != null) {
@@ -56,23 +62,17 @@ public class SeatReservation {
         }
         result = result + ",flightDate=" + ld + ",firstName=";
 
-        if (firstName == null) {
-            String fn = "null";
-            result = result + fn;
+        String fn = "null";
+        if (firstName != null) {
+            fn = firstName;
         }
-        else {
-            result = result + firstName;
-        }
+        result = result + fn + ",lastName=";
 
-        result = result + ",lastName=";
-        if (lastName == null) {
-            String ln = "null";
-            result = result + ln;
+        String ln = "null";
+        if (lastName != null) {
+            ln = lastName;
         }
-        else {
-            result = result + lastName;
-        }
-        result = result + "}";
+        result = result + ln + ",numberOfBags=" + numberOfBags + ",flyingWithInfant=" + flyingWithInfant + "}";
 
         return result;
     }
