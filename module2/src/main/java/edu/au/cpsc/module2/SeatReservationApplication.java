@@ -13,10 +13,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SeatReservationApplication extends Application {
-
+    private SeatReservation seatReservation = new SeatReservation();
+    private TextField firstNameInput = new TextField();
+    private TextField lastNameInput = new TextField();
+    private TextField flightDesignatorInput = new TextField();
+    private TextField numberOfBagsInput = new TextField();
+    private DatePicker flightDatePicker = new DatePicker();
+    private CheckBox flyingWithBabyInput = new CheckBox();
     @Override
     public void start(Stage stage) throws IOException {
-        SeatReservation seatReservation = new SeatReservation();
+
 
         //BorderPane
         BorderPane borderPane = new BorderPane();
@@ -36,12 +42,6 @@ public class SeatReservationApplication extends Application {
         TextField passengerTotalInput = new TextField("1");
         passengerTotalInput.setEditable(false);
 
-        TextField firstNameInput = new TextField();
-        TextField lastNameInput = new TextField();
-        TextField flightDesignatorInput = new TextField();
-        TextField numberOfBagsInput = new TextField();
-        DatePicker flightDatePicker = new DatePicker();
-        CheckBox flyingWithBabyInput = new CheckBox();
         //Add UI
         addCenterGridPaneUI(center, passengerTotalLabel, passengerTotalInput, flightDateLabel, flightDatePicker,
                 lastNameLabel, lastNameInput, firstNameLabel, firstNameInput, flightDesignatorLabel,
