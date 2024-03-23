@@ -12,7 +12,6 @@ public class AirportApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        List<Airport> x = Airport.readAll();
         FXMLLoader fxmlLoader = new FXMLLoader(AirportApplication.class.getResource("airportapp-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 310);
         stage.setMinWidth(220.0);
