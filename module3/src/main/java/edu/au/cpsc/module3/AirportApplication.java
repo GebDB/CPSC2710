@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class AirportApplication extends Application {
     @Override
@@ -17,7 +18,14 @@ public class AirportApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        // Quick test for readAll method.
+        List<Airport> x = Airport.readAll();
+        for (Airport airport : x) {
+            Double[] a = airport.getCoordinates();
+            System.out.println(a[0] + "..." + a[1]);
+        }
+
         launch();
     }
 }

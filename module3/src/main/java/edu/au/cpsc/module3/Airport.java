@@ -1,7 +1,10 @@
 package edu.au.cpsc.module3;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Airport {
     private String ident;
@@ -15,7 +18,7 @@ public class Airport {
     private String gpsCode;
     private String iataCode;
     private String localCode;
-    private double[] coordinates = new double[2];
+    private Double[] coordinates = new Double[2];
 
     public String getIdent() {
         return ident;
@@ -61,7 +64,7 @@ public class Airport {
         return localCode;
     }
 
-    public double[] getCoordinates() {
+    public Double[] getCoordinates() {
         return coordinates;
     }
 
@@ -109,8 +112,40 @@ public class Airport {
         this.localCode = localCode;
     }
 
-    public void setCoordinates(double[] coordinates) {
+    public void setCoordinates(Double[] coordinates) {
         this.coordinates = coordinates;
     }
-
+    public static List<Airport> readAll() throws IOException {
+        List<Airport> airports = new ArrayList<>();
+        try {
+            InputStream inputStream = Airport.class.getResourceAsStream("airport-codes.csv");
+            if (inputStream == null) {
+                throw new IOException("Cannot find airport-codes.csv file");
+            }
+            Scanner sc = new Scanner(inputStream);
+            sc.nextLine();
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                String[] parts = line.split(",");
+                Airport airport = new Airport();
+                airport.setIdent(parts[0]);
+                airport.setType(parts[1]);
+                airport.setName(parts[2]);
+                airport.setElevationft(Integer.parseInt(parts[3]));
+                airport.setContinent(parts[4]);
+                airport.setCountry(parts[5]);
+                airport.setRegion(parts[6]);
+                airport.setMunicipality(parts[7]);
+                airport.setGpsCode(parts[8]);
+                airport.setIataCode(parts[9]);
+                airport.setLocalCode(parts[10]);
+                Double[] coords = {Double.parseDouble(parts[11]), Double.parseDouble(parts[12])};
+                airport.setCoordinates(coords);
+                airports.add(airport);
+            }
+        }catch (Exception e) {
+            System.out.println(e);
+        }
+        return airports;
+    }
 }
