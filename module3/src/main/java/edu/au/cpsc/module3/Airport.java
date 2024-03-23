@@ -2,7 +2,9 @@ package edu.au.cpsc.module3;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -115,6 +117,7 @@ public class Airport {
     public void setCoordinates(Double[] coordinates) {
         this.coordinates = coordinates;
     }
+    //Create a list of airports from csv file
     public static List<Airport> readAll() throws IOException {
         List<Airport> airports = new ArrayList<>();
         try {
@@ -122,16 +125,23 @@ public class Airport {
             if (inputStream == null) {
                 throw new IOException("Cannot find airport-codes.csv file");
             }
-            Scanner sc = new Scanner(inputStream);
+            Scanner sc = new Scanner(inputStream, "Windows-1252");
             sc.nextLine();
+
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] parts = line.split(",");
+
                 Airport airport = new Airport();
                 airport.setIdent(parts[0]);
                 airport.setType(parts[1]);
                 airport.setName(parts[2]);
-                airport.setElevationft(Integer.parseInt(parts[3]));
+                if (parts[3].isEmpty()) {
+                    airport.setElevationft(null);
+                }
+                else {
+                    airport.setElevationft(Integer.parseInt(parts[3]));
+                }
                 airport.setContinent(parts[4]);
                 airport.setCountry(parts[5]);
                 airport.setRegion(parts[6]);
@@ -141,6 +151,7 @@ public class Airport {
                 airport.setLocalCode(parts[10]);
                 Double[] coords = {Double.parseDouble(parts[11]), Double.parseDouble(parts[12])};
                 airport.setCoordinates(coords);
+
                 airports.add(airport);
             }
         }catch (Exception e) {
