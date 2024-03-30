@@ -20,7 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class AirlineTableViewController  {
 
     @FXML
-    private TableView<ScheduledFlight> scheduledFlightTableView;
+    private TableView<ScheduledFlight> airlineTableView;
 
     @FXML
     private TableColumn<ScheduledFlight, String> fdColumn, departAirportColumn, departTimeColumn,
@@ -32,31 +32,30 @@ public class AirlineTableViewController  {
         departTimeColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,String>("Departure Time"));
         arrivalAirportColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,String>("Arrival Airport"));
         arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,String>("Arrival Time"));
-        departTimeColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,String>("Departure Time"));
         daysOfWeekColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,String>("Days of Week"));
-        scheduledFlightTableView.getSelectionModel().selectedItemProperty().addListener(c -> tableSelectionChanged());
+        airlineTableView.getSelectionModel().selectedItemProperty().addListener(c -> tableSelectionChanged());
     }
 
     public void showFlights(List<ScheduledFlight> flights) {
         SortedList<ScheduledFlight> sortedList = new SortedList<>(FXCollections.observableList(flights));
-        scheduledFlightTableView.setItems(sortedList);
-        sortedList.comparatorProperty().bind(scheduledFlightTableView.comparatorProperty());
-        scheduledFlightTableView.refresh();
+        airlineTableView.setItems(sortedList);
+        sortedList.comparatorProperty().bind(airlineTableView.comparatorProperty());
+        airlineTableView.refresh();
     }
 
     public void onFlightSelectionChanged(EventHandler<FlightTableEvent> handler) {
-        scheduledFlightTableView.addEventHandler(FlightTableEvent.FLIGHT_SELECTED, handler);
+        airlineTableView.addEventHandler(FlightTableEvent.FLIGHT_SELECTED, handler);
     }
 
     private void tableSelectionChanged() {
-        ScheduledFlight selectedFlight = scheduledFlightTableView.getSelectionModel().getSelectedItem();
+        ScheduledFlight selectedFlight = airlineTableView.getSelectionModel().getSelectedItem();
         FlightTableEvent event = new FlightTableEvent(FlightTableEvent.FLIGHT_SELECTED,
                 selectedFlight);
-        scheduledFlightTableView.fireEvent(event);
+        airlineTableView.fireEvent(event);
     }
 
     public void select(ScheduledFlight flight) {
-        scheduledFlightTableView.getSelectionModel().select(flight);
+        airlineTableView.getSelectionModel().select(flight);
     }
 
     public static class FlightTableEvent extends Event {

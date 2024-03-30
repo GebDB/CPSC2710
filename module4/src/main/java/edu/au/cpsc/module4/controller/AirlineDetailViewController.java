@@ -12,18 +12,18 @@ import java.util.HashSet;
 
 public class AirlineDetailViewController {
     @FXML
-    private static TextField fdField;
+    private TextField fdField;
     @FXML
-    private static TextField departureAirportField;
+    private TextField departureAirportField;
     @FXML
-    private static TextField departureTimeField;
+    private TextField departureTimeField;
     @FXML
-    private static TextField arrivalAirportField;
+    private TextField arrivalAirportField;
     @FXML
-    private static TextField arrivalTimeField;
+    private TextField arrivalTimeField;
     @FXML
-    private static TextField daysOfWeekField;
-    public static void showFlight(ScheduledFlight flight) {
+    private TextField daysOfWeekField;
+    public void showFlight(ScheduledFlight flight) {
         if (flight == null) {
             fdField.clear();
             departureAirportField.clear();

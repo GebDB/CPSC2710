@@ -41,7 +41,7 @@ public class AirlineSummaryApplicationController {
     }
 
     private void showFlight(ScheduledFlight flight) {
-        AirlineDetailViewController.showFlight(flight);
+        airlineDetailViewController.showFlight(flight);
         LocalTime time = null;
         HashSet<String> days = null;
         flightBeingEdited = flight == null ? new ScheduledFlight("", "",

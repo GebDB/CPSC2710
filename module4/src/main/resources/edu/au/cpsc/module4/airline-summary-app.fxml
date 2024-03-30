@@ -10,12 +10,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module4.controller.AirlineSummaryApplicationController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1112.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module4.controller.AirlineSummaryApplicationController">
     <center>
         <fx:include fx:id="airlineTableView" source="view/airline-table-view.fxml" />
     </center>
     <bottom>
-        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <HBox prefHeight="154.0" prefWidth="598.0" BorderPane.alignment="CENTER">
             <children>
                 <fx:include fx:id="airlineDetailView" source="view/airline-detail-view.fxml" HBox.hgrow="ALWAYS" />
                 <VBox prefHeight="96.0" prefWidth="194.0" spacing="2.0">

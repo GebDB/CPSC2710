@@ -10,8 +10,6 @@ public class ScheduledFlight implements Serializable {
     private String arrivalAirportIdent;
     private LocalTime arrivalTime;
     private HashSet<String> daysOfWeek;
-//if the setter is called with null, throw InvalidArgumentException.
-// I recommend writing unit tests to verify that your class is working properly.
 
     public ScheduledFlight(String flightDesignator, String departureAirportIdent, LocalTime departureTime,
                            String arrivalAirportIdent, LocalTime arrivalTime, HashSet<String> daysOfWeek) {
@@ -28,6 +26,9 @@ public class ScheduledFlight implements Serializable {
     }
 
     public void setFlightDesignator(String flightDesignator) {
+        if (flightDesignator == null) {
+            throw new IllegalArgumentException("Flight designator cannot be null");
+        }
         this.flightDesignator = flightDesignator;
     }
 
@@ -36,6 +37,9 @@ public class ScheduledFlight implements Serializable {
     }
 
     public void setDepartureAirportIdent(String departureAirportIdent) {
+        if (departureAirportIdent == null) {
+            throw new IllegalArgumentException("Departure airport identifier cannot be null");
+        }
         this.departureAirportIdent = departureAirportIdent;
     }
 
@@ -44,6 +48,7 @@ public class ScheduledFlight implements Serializable {
     }
 
     public void setDepartureTime(LocalTime departureTime) {
+        // No need to check for null here, as LocalTime is a non-nullable type
         this.departureTime = departureTime;
     }
 
@@ -52,6 +57,9 @@ public class ScheduledFlight implements Serializable {
     }
 
     public void setArrivalAirportIdent(String arrivalAirportIdent) {
+        if (arrivalAirportIdent == null) {
+            throw new IllegalArgumentException("Arrival airport identifier cannot be null");
+        }
         this.arrivalAirportIdent = arrivalAirportIdent;
     }
 
@@ -60,6 +68,7 @@ public class ScheduledFlight implements Serializable {
     }
 
     public void setArrivalTime(LocalTime arrivalTime) {
+        // No need to check for null here, as LocalTime is a non-nullable type
         this.arrivalTime = arrivalTime;
     }
 
@@ -68,6 +77,9 @@ public class ScheduledFlight implements Serializable {
     }
 
     public void setDaysOfWeek(HashSet<String> daysOfWeek) {
+        if (daysOfWeek == null) {
+            throw new IllegalArgumentException("Days of week cannot be null");
+        }
         this.daysOfWeek = daysOfWeek;
     }
 
