@@ -2,12 +2,11 @@ package edu.au.cpsc.module4.controller;
 
 import edu.au.cpsc.module4.model.ScheduledFlight;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.util.converter.LocalTimeStringConverter;
+import javafx.scene.control.ToggleButton;
 
 import java.time.LocalTime;
-import java.util.Arrays;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 
 public class AirlineDetailViewController {
@@ -22,7 +21,7 @@ public class AirlineDetailViewController {
     @FXML
     private TextField arrivalTimeField;
     @FXML
-    private TextField daysOfWeekField;
+    private ToggleButton u,m,t,w,r,f,s;
     public void showFlight(ScheduledFlight flight) {
         if (flight == null) {
             fdField.clear();
@@ -30,33 +29,100 @@ public class AirlineDetailViewController {
             departureTimeField.clear();
             arrivalAirportField.clear();
             arrivalTimeField.clear();
-            daysOfWeekField.clear();
+            u.setSelected(false);
+            m.setSelected(false);
+            t.setSelected(false);
+            w.setSelected(false);
+            r.setSelected(false);
+            f.setSelected(false);
+            s.setSelected(false);
             return;
         }
         fdField.setText(flight.getFlightDesignator());
         departureAirportField.setText(flight.getDepartureAirportIdent());
-        departureTimeField.setText(flight.getDepartureTime().toString());
+
+        LocalTime departureTime = flight.getDepartureTime();
+        if (departureTime != null) {
+            departureTimeField.setText(departureTime.toString());
+        } else {
+            departureTimeField.setText("");
+        }
+
         arrivalAirportField.setText(flight.getArrivalAirportIdent());
-        arrivalTimeField.setText(flight.getArrivalTime().toString());
-        daysOfWeekField.setText(flight.getDaysOfWeek().toString());
 
+        LocalTime arrivalTime = flight.getArrivalTime();
+        if (arrivalTime != null) {
+            arrivalTimeField.setText(arrivalTime.toString());
+        } else {
+            arrivalTimeField.setText("");
+        }
 
+        HashSet<String> daysOfWeek = flight.getDaysOfWeek();
+        if (daysOfWeek != null) {
+            for (String day : daysOfWeek) {
+                switch (day.toLowerCase()) {
+                    case "u":
+                        u.setSelected(true);
+                        break;
+                    case "m":
+                        m.setSelected(true);
+                        break;
+                    case "t":
+                        t.setSelected(true);
+                        break;
+                    case "w":
+                        w.setSelected(true);
+                        break;
+                    case "r":
+                        r.setSelected(true);
+                        break;
+                    case "f":
+                        f.setSelected(true);
+                        break;
+                    case "s":
+                        s.setSelected(true);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 
     public void updateFlight(ScheduledFlight flight) {
         flight.setFlightDesignator(fdField.getText());
 
-        LocalTimeStringConverter converter = new LocalTimeStringConverter();
-        LocalTime time = converter.fromString(departureTimeField.getText());
+        DateTimeFormatter converter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime time = LocalTime.parse(departureTimeField.getText(),converter);
         flight.setDepartureTime(time);
 
         flight.setDepartureAirportIdent(departureAirportField.getText());
 
-        time = converter.fromString(arrivalTimeField.getText());
+        time = LocalTime.parse(arrivalTimeField.getText(),converter);
         flight.setArrivalTime(time);
 
-        String[] days = daysOfWeekField.getText().split(",");
-        HashSet<String> daysOfWeek = new HashSet<>(Arrays.asList(days));
+        HashSet<String> daysOfWeek = new HashSet<>();
+        if (u.isSelected()) {
+            daysOfWeek.add("U");
+        }
+        if (m.isSelected()) {
+            daysOfWeek.add("M");
+        }
+        if (t.isSelected()) {
+            daysOfWeek.add("T");
+        }
+        if (w.isSelected()) {
+            daysOfWeek.add("W");
+        }
+        if (r.isSelected()) {
+            daysOfWeek.add("R");
+        }
+        if (f.isSelected()) {
+            daysOfWeek.add("F");
+        }
+        if (s.isSelected()) {
+            daysOfWeek.add("S");
+        }
         flight.setDaysOfWeek(daysOfWeek);
 
         flight.setArrivalAirportIdent(arrivalAirportField.getText());

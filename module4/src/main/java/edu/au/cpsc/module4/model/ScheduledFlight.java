@@ -48,7 +48,9 @@ public class ScheduledFlight implements Serializable {
     }
 
     public void setDepartureTime(LocalTime departureTime) {
-        // No need to check for null here, as LocalTime is a non-nullable type
+        if (departureTime == null) {
+            throw new IllegalArgumentException("departure time cannot be null");
+        }
         this.departureTime = departureTime;
     }
 
@@ -68,7 +70,9 @@ public class ScheduledFlight implements Serializable {
     }
 
     public void setArrivalTime(LocalTime arrivalTime) {
-        // No need to check for null here, as LocalTime is a non-nullable type
+        if (arrivalTime == null) {
+            throw new IllegalArgumentException("arrival time cannot be null");
+        }
         this.arrivalTime = arrivalTime;
     }
 

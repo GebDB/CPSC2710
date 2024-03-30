@@ -23,14 +23,10 @@ public class AirlineSummaryApplicationController {
     @FXML
     private MenuItem updateMenuItem;
 
-    /**
-     * Current customer being edited
-     */
+
     private ScheduledFlight flightBeingEdited;
 
-    /**
-     * Indicates whether the customer being edited is new or not
-     */
+
     private boolean flightBeingEditedIsNew;
 
     public void initialize() {

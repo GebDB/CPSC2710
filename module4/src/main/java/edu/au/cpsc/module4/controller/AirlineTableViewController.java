@@ -22,9 +22,7 @@ public class AirlineTableViewController  {
     @FXML
     private TableView<ScheduledFlight> airlineTableView;
 
-  //  @FXML
-  //  private TableColumn<ScheduledFlight, String> fdColumn, departAirportColumn, departTimeColumn,
-                     //   arrivalAirportColumn, arrivalTimeColumn, daysOfWeekColumn;'
+
     @FXML
     private TableColumn<ScheduledFlight, String> fdColumn, departAirportColumn, arrivalAirportColumn;
     @FXML

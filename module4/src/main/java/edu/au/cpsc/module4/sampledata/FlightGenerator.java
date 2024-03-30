@@ -4,11 +4,12 @@ import edu.au.cpsc.module4.data.Db;
 import edu.au.cpsc.module4.model.ScheduledFlight;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 
 public class FlightGenerator {
     public static void main(String[] args) {
-        LocalTime time = LocalTime.now();
+        LocalTime time = LocalTime.of(13, 30, 0);
         HashSet<String> days = new HashSet<>();
         days.add("Monday");
         days.add("Tuesday");
