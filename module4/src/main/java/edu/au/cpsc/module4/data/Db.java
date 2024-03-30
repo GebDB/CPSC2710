@@ -11,7 +11,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public class Db {
 
-    public static final File DEFAULT_FILE = new File("customers.dat");
+    public static final File DEFAULT_FILE = new File("airlines.dat");
 
     private static AirlineDatabase airlineDatabase = null;
 

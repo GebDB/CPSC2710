@@ -4,8 +4,10 @@ import edu.au.cpsc.module4.model.ScheduledFlight;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.util.converter.LocalTimeStringConverter;
 
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class AirlineDetailViewController {
@@ -43,10 +45,20 @@ public class AirlineDetailViewController {
 
     public void updateFlight(ScheduledFlight flight) {
         flight.setFlightDesignator(fdField.getText());
-        //flight.setDepartureTime(departureTimeField.getText().LocalTime.parse);
+
+        LocalTimeStringConverter converter = new LocalTimeStringConverter();
+        LocalTime time = converter.fromString(departureTimeField.getText());
+        flight.setDepartureTime(time);
+
         flight.setDepartureAirportIdent(departureAirportField.getText());
-        //flight.setArrivalTime(arrivalTimeField.getText().LocalTime.parse);
-        //flight.setDaysOfWeek(daysOfWeekField.getText());
+
+        time = converter.fromString(arrivalTimeField.getText());
+        flight.setArrivalTime(time);
+
+        String[] days = daysOfWeekField.getText().split(",");
+        HashSet<String> daysOfWeek = new HashSet<>(Arrays.asList(days));
+        flight.setDaysOfWeek(daysOfWeek);
+
         flight.setArrivalAirportIdent(arrivalAirportField.getText());
     }
 

@@ -10,17 +10,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module4.controller.AirlineSummaryApplicationController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module4.controller.AirlineSummaryApplicationController">
     <center>
         <fx:include fx:id="airlineTableView" source="view/airline-table-view.fxml" />
     </center>
     <bottom>
         <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <fx:include fx:id="customerDetailView" source="view/airline-detail-view.fxml" HBox.hgrow="ALWAYS" />
-                <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0">
+                <fx:include fx:id="airlineDetailView" source="view/airline-detail-view.fxml" HBox.hgrow="ALWAYS" />
+                <VBox prefHeight="96.0" prefWidth="194.0" spacing="2.0">
                     <children>
-                        <Button fx:id="updateButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#updateButtonAction" text="Update" />
+                        <Button fx:id="updateButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#updateButtonAction" prefHeight="25.0" prefWidth="75.0" text="Update" />
                         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#newButtonAction" text="New" />
                         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteButtonAction" text="Delete" />
                     </children>
