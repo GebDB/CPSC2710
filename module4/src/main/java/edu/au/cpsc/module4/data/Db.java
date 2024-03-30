@@ -6,8 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 public class Db {
 
@@ -16,7 +14,6 @@ public class Db {
     private static AirlineDatabase airlineDatabase = null;
 
     public static AirlineDatabase getDatabase() {
-        // lazy initialization
         if (airlineDatabase == null)
             airlineDatabase = loadDatabase();
         return airlineDatabase;

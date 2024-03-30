@@ -22,17 +22,23 @@ public class AirlineTableViewController  {
     @FXML
     private TableView<ScheduledFlight> airlineTableView;
 
+  //  @FXML
+  //  private TableColumn<ScheduledFlight, String> fdColumn, departAirportColumn, departTimeColumn,
+                     //   arrivalAirportColumn, arrivalTimeColumn, daysOfWeekColumn;'
     @FXML
-    private TableColumn<ScheduledFlight, String> fdColumn, departAirportColumn, departTimeColumn,
-                        arrivalAirportColumn, arrivalTimeColumn, daysOfWeekColumn;
+    private TableColumn<ScheduledFlight, String> fdColumn, departAirportColumn, arrivalAirportColumn;
+    @FXML
+    private TableColumn<ScheduledFlight, LocalTime> departTimeColumn, arrivalTimeColumn;
+    @FXML
+    private TableColumn<ScheduledFlight, HashSet<String>> daysOfWeekColumn;
 
     public void initialize() {
-        fdColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,String>("Flight Designator"));
-        departAirportColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,String>("Departure Airport"));
-        departTimeColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,String>("Departure Time"));
-        arrivalAirportColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,String>("Arrival Airport"));
-        arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,String>("Arrival Time"));
-        daysOfWeekColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,String>("Days of Week"));
+        fdColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,String>("FlightDesignator"));
+        departAirportColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,String>("DepartureAirportIdent"));
+        departTimeColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,LocalTime>("DepartureTime"));
+        arrivalAirportColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,String>("ArrivalAirportIdent"));
+        arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight,LocalTime>("ArrivalTime"));
+        daysOfWeekColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight, HashSet<String>>("DaysOfWeek"));
         airlineTableView.getSelectionModel().selectedItemProperty().addListener(c -> tableSelectionChanged());
     }
 
