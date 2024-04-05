@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a6a33ac1-9e2b-4dc2-9382-a255b5012c56" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../module1/module1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/au/cpsc/miscstyle/Part1Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/au/cpsc/miscstyle/Part1Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/au/cpsc/miscstyle/part1.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../module3/src/main/java/edu/au/cpsc/module3/Airport.java" beforeDir="false" afterPath="$PROJECT_DIR$/../module3/src/main/java/edu/au/cpsc/module3/Airport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../module3/src/main/java/edu/au/cpsc/module3/AirportApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../module3/src/main/java/edu/au/cpsc/module3/AirportApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/au/cpsc/module5/Part1Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/au/cpsc/module5/Part1Controller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/au/cpsc/module5/miscstyle/part1.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/au/cpsc/module5/miscstyle/style/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/au/cpsc/miscstyle/style/main.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2eeomzItkdX3u3drIr3QVumieBn" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Part1Application.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "module5",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\PCUSER\Documents\School\CPSC2710\module5\src\main\resources\edu\au\cpsc\miscstyle" />
+      <recent name="C:\Users\PCUSER\Documents\School\CPSC2710\module5\src\main\java" />
+      <recent name="C:\Users\PCUSER\Documents\School\CPSC2710\module5\src\main\java\edu\au\cpsc\miscstyle" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="edu.au.cpsc.miscstyle" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a6a33ac1-9e2b-4dc2-9382-a255b5012c56" name="Changes" comment="" />
+      <created>1712274568103</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1712274568103</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
