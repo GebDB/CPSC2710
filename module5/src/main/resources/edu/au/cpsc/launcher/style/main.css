@@ -1,0 +1,36 @@
+@import "https://fonts.googleapis.com/css2?family=Play"
+
+#airports-btn {
+    -fx-background-image: url("airports-logo.png");
+    -fx-background-size: 100px auto;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top left;
+}
+#seat-reservation-btn {
+    -fx-background-image: url("seat-logo.png");
+    -fx-background-size: 100px auto;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top left;
+}
+#flight-schedule-btn {
+    -fx-background-image: url("schedule-logo.png");
+    -fx-background-size: 100px auto;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top left;
+}
+#aircraft-btn {
+    -fx-background-image: url("airplane-logo.png");
+    -fx-background-size: 100px auto;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: top left;
+}
+
+Button {
+    -fx-font-family: "Play";
+    -fx-font-size: 14pt;
+    -fx-opacity: 0.75;
+}
+.root {
+    -fx-background-image: url("background-image.png");
+    -fx-background-size: cover;
+}
