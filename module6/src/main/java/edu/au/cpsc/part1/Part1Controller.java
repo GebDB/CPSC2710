@@ -1,6 +1,7 @@
 package edu.au.cpsc.part1;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -32,6 +33,6 @@ public class Part1Controller {
   private Label numberOfCharactersLabel, validityLabel;
 
   public void initialize() {
-    // your bindings go here
+    echoTextField.textProperty().bind(messageTextField.textProperty());
   }
 }
