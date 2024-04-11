@@ -37,5 +37,6 @@ public class Part1Controller {
     firstBidirectionalTextField.textProperty().bindBidirectional(secondBidirectionalTextField.textProperty());
     secretOverlayImageView.opacityProperty().bind(secretSlider.valueProperty());
     selectMeLabel.textProperty().bind(selectMeCheckBox.selectedProperty().asString());
+    numberOfCharactersLabel.textProperty().bind(tweetTextField.textProperty().length().asString());
   }
 }
