@@ -34,5 +34,6 @@ public class Part1Controller {
 
   public void initialize() {
     echoTextField.textProperty().bind(messageTextField.textProperty());
+    firstBidirectionalTextField.textProperty().bindBidirectional(secondBidirectionalTextField.textProperty());
   }
 }
