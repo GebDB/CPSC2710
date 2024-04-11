@@ -38,5 +38,7 @@ public class Part1Controller {
     secretOverlayImageView.opacityProperty().bind(secretSlider.valueProperty());
     selectMeLabel.textProperty().bind(selectMeCheckBox.selectedProperty().asString());
     numberOfCharactersLabel.textProperty().bind(tweetTextField.textProperty().length().asString());
+    var validity = Bindings.when(tweetTextField.textProperty().length().lessThan(11)).then("Valid").otherwise("Invalid");
+    validityLabel.textProperty().bind(validity);
   }
 }
