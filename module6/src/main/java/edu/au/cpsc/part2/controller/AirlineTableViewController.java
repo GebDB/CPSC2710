@@ -55,7 +55,9 @@ public class AirlineTableViewController  {
                 selectedFlight);
         airlineTableView.fireEvent(event);
     }
-
+    public ScheduledFlight getFlight() {
+        return airlineTableView.getSelectionModel().getSelectedItem();
+    }
     public void select(ScheduledFlight flight) {
         airlineTableView.getSelectionModel().select(flight);
     }

@@ -112,7 +112,7 @@ public class AirlineDetailViewController {
         model.setNew(false);
     }
 
-    public void updateFlight(ScheduledFlight flight) {
+    public boolean updateFlight(ScheduledFlight flight) {
         flight.setFlightDesignator(model.getFD());
 
         DateTimeFormatter converter = DateTimeFormatter.ofPattern("HH:mm");
@@ -149,6 +149,7 @@ public class AirlineDetailViewController {
             daysOfWeek.add("S");
         }
         flight.setDaysOfWeek(daysOfWeek);
+        return true;
     }
 
 }

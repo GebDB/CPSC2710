@@ -35,16 +35,15 @@ public class AirlineSummaryApplicationController {
     @FXML
     private MenuItem newMenuItem;
 
-    private ScheduledFlight flightBeingEdited;
-
-
     public void initialize() {
         airlineTableViewController.showFlights(Db.getDatabase().getScheduledFlights());
         airlineTableViewController.onFlightSelectionChanged(
                 event -> showFlight(event.getSelectedFlight()));
         AirlineDetailModel uiModel = airlineDetailViewController.getModel();
         updateButton.disableProperty().bind(uiModel.modifiedProperty().not());
+        updateButton.textProperty().bind(Bindings.when(uiModel.newProperty()).then("Add").otherwise("Update"));
         updateMenuItem.disableProperty().bind(uiModel.modifiedProperty().not());
+        updateMenuItem.textProperty().bind(Bindings.when(uiModel.newProperty()).then("Add").otherwise("Update"));
         newButton.disableProperty().bind(uiModel.modifiedProperty()
                 .or(uiModel.newProperty()));
         newMenuItem.disableProperty().bind(uiModel.modifiedProperty()
@@ -59,26 +58,41 @@ public class AirlineSummaryApplicationController {
 
     private void showFlight(ScheduledFlight flight) {
         airlineDetailViewController.showFlight(flight);
-        LocalTime time = null;
-        HashSet<String> days = null;
-        flightBeingEdited = flight == null ? new ScheduledFlight("", "",
-                time, "", time, days) : flight;
-        String buttonLabel = airlineDetailViewController.getModel().isNew() ? "Add" : "Update";
-        updateButton.setText(buttonLabel);
-        updateMenuItem.setText(buttonLabel);
     }
 
     @FXML
     protected void updateButtonAction() {
-        airlineDetailViewController.updateFlight(flightBeingEdited);
         if (airlineDetailViewController.getModel().isNew()) {
-            Db.getDatabase().addScheduledFlight(flightBeingEdited);
-        } else {
-            Db.getDatabase().updateScheduledFlight(flightBeingEdited);
+            addFlight();
         }
+        else {
+            updateFlight();
+        }
+
+    }
+    private void addFlight() {
+        ScheduledFlight flight = new ScheduledFlight("", "", null, "", null, null);
+        if (!airlineDetailViewController.updateFlight(flight)) {
+            return;
+        }
+        Db.getDatabase().addScheduledFlight(flight);
         Db.saveDatabase();
         airlineTableViewController.showFlights(Db.getDatabase().getScheduledFlights());
-        airlineTableViewController.select(flightBeingEdited);
+        airlineTableViewController.select(flight);
+    }
+    private void updateFlight() {
+        ScheduledFlight flight = getFlightBeingEdited();
+        if(!airlineDetailViewController.updateFlight(flight)){
+            return;
+        }
+        Db.getDatabase().updateScheduledFlight(flight);
+        Db.saveDatabase();
+        airlineTableViewController.showFlights(Db.getDatabase().getScheduledFlights());
+        airlineTableViewController.select(getFlightBeingEdited());
+    }
+
+    private ScheduledFlight getFlightBeingEdited() {
+        return airlineTableViewController.getFlight();
     }
 
     @FXML
@@ -91,7 +105,7 @@ public class AirlineSummaryApplicationController {
         if (airlineDetailViewController.getModel().isNew()) {
             airlineTableViewController.select(null);
         } else {
-            Db.getDatabase().removeScheduledFlight(flightBeingEdited);
+            Db.getDatabase().removeScheduledFlight(getFlightBeingEdited());
             Db.saveDatabase();
             airlineTableViewController.showFlights(Db.getDatabase().getScheduledFlights());
         }
