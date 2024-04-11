@@ -1,6 +1,7 @@
 package edu.au.cpsc.part2.controller;
 
 import edu.au.cpsc.part2.model.ScheduledFlight;
+import edu.au.cpsc.part2.uimodel.AirlineDetailModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -22,39 +23,59 @@ public class AirlineDetailViewController {
     private TextField arrivalTimeField;
     @FXML
     private ToggleButton u,m,t,w,r,f,s;
+
+    private AirlineDetailModel model;
+   public void initialize() {
+        model = new AirlineDetailModel();
+        fdField.textProperty().bindBidirectional(model.fdProperty());
+        departureAirportField.textProperty().bindBidirectional(model.departureAirportProperty());
+        departureTimeField.textProperty().bindBidirectional(model.departureTimeProperty());
+        arrivalAirportField.textProperty().bindBidirectional(model.arrivalAirportProperty());
+        arrivalTimeField.textProperty().bindBidirectional(model.arrivalTimeProperty());
+        u.selectedProperty().bindBidirectional(model.uProperty());
+        m.selectedProperty().bindBidirectional(model.mProperty());
+        t.selectedProperty().bindBidirectional(model.tProperty());
+        w.selectedProperty().bindBidirectional(model.wProperty());
+        r.selectedProperty().bindBidirectional(model.rProperty());
+        f.selectedProperty().bindBidirectional(model.fProperty());
+        s.selectedProperty().bindBidirectional(model.sProperty());
+    }
+    public AirlineDetailModel getModel() { return model;}
     public void showFlight(ScheduledFlight flight) {
         if (flight == null) {
-            fdField.clear();
-            departureAirportField.clear();
-            departureTimeField.clear();
-            arrivalAirportField.clear();
-            arrivalTimeField.clear();
-            u.setSelected(false);
-            m.setSelected(false);
-            t.setSelected(false);
-            w.setSelected(false);
-            r.setSelected(false);
-            f.setSelected(false);
-            s.setSelected(false);
+            model.setFD("");
+            model.setDepartureAirport("");
+            model.setDepartureTime("");
+            model.setArrivalAirport("");
+            model.setArrivalTime("");
+            model.setU(false);
+            model.setM(false);
+            model.setT(false);
+            model.setW(false);
+            model.setR(false);
+            model.setF(false);
+            model.setS(false);
+            model.setModified(false);
+            model.setNew(true);
             return;
         }
-        fdField.setText(flight.getFlightDesignator());
-        departureAirportField.setText(flight.getDepartureAirportIdent());
+        model.setFD(flight.getFlightDesignator());
+        model.setDepartureAirport(flight.getDepartureAirportIdent());
 
         LocalTime departureTime = flight.getDepartureTime();
         if (departureTime != null) {
-            departureTimeField.setText(departureTime.toString());
+            model.setDepartureTime(departureTime.toString());
         } else {
-            departureTimeField.setText("");
+            model.setDepartureTime("");
         }
 
-        arrivalAirportField.setText(flight.getArrivalAirportIdent());
+        model.setArrivalAirport(flight.getArrivalAirportIdent());
 
         LocalTime arrivalTime = flight.getArrivalTime();
         if (arrivalTime != null) {
-            arrivalTimeField.setText(arrivalTime.toString());
+            model.setArrivalTime(arrivalTime.toString());
         } else {
-            arrivalTimeField.setText("");
+            model.setArrivalTime("");
         }
 
         HashSet<String> daysOfWeek = flight.getDaysOfWeek();
@@ -62,70 +83,72 @@ public class AirlineDetailViewController {
             for (String day : daysOfWeek) {
                 switch (day.toLowerCase()) {
                     case "u":
-                        u.setSelected(true);
+                        model.setU(true);
                         break;
                     case "m":
-                        m.setSelected(true);
+                        model.setM(true);
                         break;
                     case "t":
-                        t.setSelected(true);
+                        model.setT(true);
                         break;
                     case "w":
-                        w.setSelected(true);
+                        model.setW(true);
                         break;
                     case "r":
-                        r.setSelected(true);
+                        model.setR(true);
                         break;
                     case "f":
-                        f.setSelected(true);
+                        model.setF(true);
                         break;
                     case "s":
-                        s.setSelected(true);
+                        model.setS(true);
                         break;
                     default:
                         break;
                 }
             }
         }
+        model.setModified(false);
+        model.setNew(false);
     }
 
     public void updateFlight(ScheduledFlight flight) {
-        flight.setFlightDesignator(fdField.getText());
+        flight.setFlightDesignator(model.getFD());
 
         DateTimeFormatter converter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime time = LocalTime.parse(departureTimeField.getText(),converter);
+        LocalTime time = LocalTime.parse(model.getDepartureTime(),converter);
         flight.setDepartureTime(time);
 
-        flight.setDepartureAirportIdent(departureAirportField.getText());
+        flight.setDepartureAirportIdent(model.getDepartureAirport());
 
-        time = LocalTime.parse(arrivalTimeField.getText(),converter);
+        time = LocalTime.parse(model.getArrivalTime(),converter);
         flight.setArrivalTime(time);
 
+        flight.setArrivalAirportIdent(model.getArrivalAirport());
+
         HashSet<String> daysOfWeek = new HashSet<>();
-        if (u.isSelected()) {
+        if (model.getU()) {
             daysOfWeek.add("U");
         }
-        if (m.isSelected()) {
+        if (model.getM()) {
             daysOfWeek.add("M");
         }
-        if (t.isSelected()) {
+        if (model.getT()) {
             daysOfWeek.add("T");
         }
-        if (w.isSelected()) {
+        if (model.getW()) {
             daysOfWeek.add("W");
         }
-        if (r.isSelected()) {
+        if (model.getR()) {
             daysOfWeek.add("R");
         }
-        if (f.isSelected()) {
+        if (model.getF()) {
             daysOfWeek.add("F");
         }
-        if (s.isSelected()) {
+        if (model.getS()) {
             daysOfWeek.add("S");
         }
         flight.setDaysOfWeek(daysOfWeek);
-
-        flight.setArrivalAirportIdent(arrivalAirportField.getText());
     }
 
 }

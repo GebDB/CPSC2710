@@ -10,8 +10,8 @@ public class FlightGenerator {
     public static void main(String[] args) {
         LocalTime time = LocalTime.of(13, 30, 0);
         HashSet<String> days = new HashSet<>();
-        days.add("Monday");
-        days.add("Tuesday");
+        days.add("M");
+        days.add("T");
         ScheduledFlight f1 = new ScheduledFlight("PI22", "PITT",
                 time, "LATT",time,days);
         ScheduledFlight f2 = new ScheduledFlight("3333", "PIT2",

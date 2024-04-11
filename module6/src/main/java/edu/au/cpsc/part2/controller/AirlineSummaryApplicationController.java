@@ -1,5 +1,9 @@
 package edu.au.cpsc.part2.controller;
-
+import edu.au.cpsc.part2.uimodel.AirlineDetailModel;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 import edu.au.cpsc.part2.data.Db;
 import edu.au.cpsc.part2.model.ScheduledFlight;
 import javafx.application.Platform;
@@ -12,6 +16,10 @@ import java.util.HashSet;
 
 public class AirlineSummaryApplicationController {
     @FXML
+    public Button deleteButton;
+    @FXML
+    public MenuItem deleteMenuItem;
+    @FXML
     private AirlineTableViewController airlineTableViewController;
 
     @FXML
@@ -22,17 +30,30 @@ public class AirlineSummaryApplicationController {
 
     @FXML
     private MenuItem updateMenuItem;
-
+    @FXML
+    private Button newButton;
+    @FXML
+    private MenuItem newMenuItem;
 
     private ScheduledFlight flightBeingEdited;
 
-
-    private boolean flightBeingEditedIsNew;
 
     public void initialize() {
         airlineTableViewController.showFlights(Db.getDatabase().getScheduledFlights());
         airlineTableViewController.onFlightSelectionChanged(
                 event -> showFlight(event.getSelectedFlight()));
+        AirlineDetailModel uiModel = airlineDetailViewController.getModel();
+        updateButton.disableProperty().bind(uiModel.modifiedProperty().not());
+        updateMenuItem.disableProperty().bind(uiModel.modifiedProperty().not());
+        newButton.disableProperty().bind(uiModel.modifiedProperty()
+                .or(uiModel.newProperty()));
+        newMenuItem.disableProperty().bind(uiModel.modifiedProperty()
+                .or(uiModel.newProperty()));
+        deleteButton.disableProperty().bind(uiModel.modifiedProperty()
+                .or(uiModel.newProperty()));
+        deleteMenuItem.disableProperty().bind(uiModel.modifiedProperty()
+                .or(uiModel.newProperty()));
+
         showFlight(null);
     }
 
@@ -42,8 +63,7 @@ public class AirlineSummaryApplicationController {
         HashSet<String> days = null;
         flightBeingEdited = flight == null ? new ScheduledFlight("", "",
                 time, "", time, days) : flight;
-        flightBeingEditedIsNew = flight == null;
-        String buttonLabel = flightBeingEditedIsNew ? "Add" : "Update";
+        String buttonLabel = airlineDetailViewController.getModel().isNew() ? "Add" : "Update";
         updateButton.setText(buttonLabel);
         updateMenuItem.setText(buttonLabel);
     }
@@ -51,7 +71,7 @@ public class AirlineSummaryApplicationController {
     @FXML
     protected void updateButtonAction() {
         airlineDetailViewController.updateFlight(flightBeingEdited);
-        if (flightBeingEditedIsNew) {
+        if (airlineDetailViewController.getModel().isNew()) {
             Db.getDatabase().addScheduledFlight(flightBeingEdited);
         } else {
             Db.getDatabase().updateScheduledFlight(flightBeingEdited);
@@ -68,7 +88,7 @@ public class AirlineSummaryApplicationController {
 
     @FXML
     protected void deleteButtonAction() {
-        if (flightBeingEditedIsNew) {
+        if (airlineDetailViewController.getModel().isNew()) {
             airlineTableViewController.select(null);
         } else {
             Db.getDatabase().removeScheduledFlight(flightBeingEdited);
