@@ -36,5 +36,6 @@ public class Part1Controller {
     echoTextField.textProperty().bind(messageTextField.textProperty());
     firstBidirectionalTextField.textProperty().bindBidirectional(secondBidirectionalTextField.textProperty());
     secretOverlayImageView.opacityProperty().bind(secretSlider.valueProperty());
+    selectMeLabel.textProperty().bind(selectMeCheckBox.selectedProperty().asString());
   }
 }
