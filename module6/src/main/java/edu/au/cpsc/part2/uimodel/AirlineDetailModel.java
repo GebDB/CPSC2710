@@ -17,6 +17,7 @@ public class AirlineDetailModel {
     private final BooleanProperty uProperty,mProperty,tProperty,wProperty,rProperty,fProperty,sProperty;
     private final BooleanProperty modifiedProperty;
     private final BooleanProperty newProperty;
+    private final BooleanProperty validFDProperty, validTimeProperty, validAirportProperty;
 
     public AirlineDetailModel() {
         fdProperty = new SimpleStringProperty();
@@ -33,6 +34,9 @@ public class AirlineDetailModel {
         sProperty = new SimpleBooleanProperty();
         modifiedProperty = new SimpleBooleanProperty();
         newProperty = new SimpleBooleanProperty();
+        validFDProperty = new SimpleBooleanProperty();
+        validTimeProperty = new SimpleBooleanProperty();
+        validAirportProperty = new SimpleBooleanProperty();
 
         fdProperty.addListener(((observable, oldvalue, newvalue) -> setModified(true)));
         departureAirportProperty.addListener(((observable, oldvalue, newvalue) -> setModified(true)));
@@ -59,6 +63,10 @@ public class AirlineDetailModel {
     public BooleanProperty rProperty() {return rProperty;}
     public BooleanProperty fProperty() {return fProperty;}
     public BooleanProperty sProperty() {return sProperty;}
+
+    public BooleanProperty validFDProperty() {return validFDProperty;}
+    public BooleanProperty validTimeProperty() {return validTimeProperty;}
+    public BooleanProperty validAirportProperty() {return validAirportProperty;}
 
     public String getFD() { return fdProperty.get();}
     public void setFD(String fd) { fdProperty.set(fd);}
