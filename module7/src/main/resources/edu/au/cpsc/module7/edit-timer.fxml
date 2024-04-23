@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="297.0" prefWidth="334.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module7.controller.EditController">
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Timer" textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Verdana" size="24.0" />
+         </font>
+      </Text>
+   </top>
+   <center>
+      <VBox alignment="CENTER" prefHeight="245.0" prefWidth="334.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="editTimerField" alignment="CENTER" prefHeight="209.0" prefWidth="334.0" promptText="00:00:00">
+               <font>
+                  <Font name="Verdana" size="27.0" />
+               </font>
+            </TextField>
+            <Text fx:id="formatText" fill="RED" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Format must be HH:MM:SS with minutes and seconds between 00 and 59" textAlignment="CENTER" wrappingWidth="316.4765625">
+               <font>
+                  <Font name="Verdana" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="3.0" />
+               </VBox.margin>
+            </Text>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="39.0" prefWidth="334.0" BorderPane.alignment="CENTER">
+        <buttons>
+          <Button fx:id="set" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#onSet" text="Set" translateX="10.0" />
+            <Button fx:id="cancel" layoutX="269.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#onCancel" text="Cancel" translateX="-185.0" />
+        </buttons>
+      </ButtonBar>
+   </bottom>
+</BorderPane>
