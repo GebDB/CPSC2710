@@ -6,11 +6,9 @@ import java.util.TimerTask;
 public class TimerModel {
     private String timeString;
     private int hours, minutes, seconds;
-    private final Timer timer;
 
     public TimerModel() {
         timeString = "00:00:00";
-        timer = new Timer();
     }
 
     private String getTimeString() {
