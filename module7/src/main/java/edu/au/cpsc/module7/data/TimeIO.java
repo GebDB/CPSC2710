@@ -4,7 +4,7 @@ import java.io.*;
 
 public class TimeIO {
     public static final File DEFAULT_FILE = new File("time.dat");
-    public static void save(String timeString) throws IOException {
+    public static void save(String timeString) {
         try (OutputStream os = new FileOutputStream(DEFAULT_FILE)) {
             ObjectOutputStream oos = new ObjectOutputStream(os);
             oos.writeObject(timeString);
@@ -14,7 +14,7 @@ public class TimeIO {
             System.exit(-1);
         }
     }
-    public static String load() throws IOException, ClassNotFoundException {
+    public static String load() throws ClassNotFoundException {
         try (InputStream is = new FileInputStream(DEFAULT_FILE)) {
             ObjectInputStream ois = new ObjectInputStream(is);
             return (String) ois.readObject();
