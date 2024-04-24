@@ -9,15 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.util.Calendar;
-import java.util.Timer;
 
 public class EditController {
-
     @FXML
     private TextField editTimerField;
     @FXML
@@ -55,7 +49,4 @@ public class EditController {
             this.onCancel();
         }
     }
-
-
-
 }

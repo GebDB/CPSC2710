@@ -38,10 +38,10 @@
    </center>
    <bottom>
       <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="39.0" prefWidth="334.0" BorderPane.alignment="CENTER">
-        <buttons>
-          <Button fx:id="set" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#onSet" text="Set" translateX="10.0" />
+         <buttons>
+            <Button fx:id="set" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#onSet" text="Set" translateX="10.0" />
             <Button fx:id="cancel" layoutX="269.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#onCancel" text="Cancel" translateX="-185.0" />
-        </buttons>
+         </buttons>
       </ButtonBar>
    </bottom>
 </BorderPane>
