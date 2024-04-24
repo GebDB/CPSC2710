@@ -165,6 +165,7 @@ public class TimerController {
     @FXML
     protected void closeShortcut() {
         Platform.exit();
+        System.exit(0);
     }
 
     /**
