@@ -12,7 +12,7 @@ public class TimerApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TimerApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 666);
-        stage.setTitle("TimerModel");
+        stage.setTitle("Timer");
         stage.setScene(scene);
         stage.show();
     }
